@@ -105,7 +105,8 @@ while(True):
 
 
     #quando o protagonista tocar em algo, a VAR chao vira verdade e a gravidade zera
-    if(chao==False and (protagonista.collided(chao1) or protagonista.collided(chao2))and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
+    if(chao==False and (protagonista.collided(chao1) or protagonista.collided(chao2)) and 
+       (protagonista.y<chao1.y-chao1.height) and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
         gravidade=0
         chao=True
 
