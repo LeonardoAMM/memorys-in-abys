@@ -3,24 +3,31 @@ from PPlay.sprite import *
 from PPlay.gameimage import *
 from PPlay.keyboard import *
 
+
 janela = Window(1400,900)
 teclado = Keyboard()
+mouse1 = Window.get_mouse()
 
 #tem 2 sprites:
 #o protagonista virado para direita
-protagonista=Sprite("imagens/prota/sheet1.png",17)
+protagonista=Sprite("imagens/sheet1.png",17)
 # e ele virado para a esquerda
-protagonistaIn=Sprite("imagens/prota/sheetin.png",17)
+protagonistaIn=Sprite("imagens/sheetin.png",17)
 
+txt = "Deseja ir para a próxima fase?"
+
+ceu = GameImage("./imagens/ceu.png")
 
 chao1=Sprite("imagens/terra_1.png")
 chao2=Sprite("imagens/terra_1.png")
+chao3=Sprite("imagens/terra_1.png")
+chao_ponte=Sprite("imagens/ponte.png")
 
 chaos=[]
 
 velocidadeX = 0
 velocidadeY = 0
-
+vel_chao_rand = 30
 direita=True
 
 gravidade=0
@@ -34,12 +41,19 @@ protagonistaIn.set_position(300,janela.height/3)
 protagonista.set_total_duration(2000)
 protagonistaIn.set_total_duration(2000)
 
-chao1.set_position(300,janela.height/2+chao1.height)
-chao2.set_position(900,janela.height/2+chao1.height)
+chao1.set_position(300,janela.height/2.5+chao1.height)
+chao2.set_position(1000,janela.height/2.5+chao1.height)
+chao3.set_position(1600,1.5*janela.height/2+chao1.height)
+chao_ponte.set_position(2400,janela.height/2.8+chao1.height)
+
 
 chaos.append(chao1)
 chaos.append(chao2)
+chaos.append(chao3)
+chaos.append(chao_ponte)
 
+
+janela.set_title("Memories In Abyss")
 
 while(True):
 
@@ -81,7 +95,7 @@ while(True):
 
     #Aqui muda a animação do protagonista enquanto ele cai, quando ele estava no chao (VAR chao for verdade) e não estiver tocando em mais nada (esses colides dai) ele cai direto
     #a velocidadY esta zerado, pq ele n da um impulso
-    if((protagonista.collided(chao1)==False and protagonista.collided(chao2)==False) and chao==True):
+    if((protagonista.collided(chao1)==False and protagonista.collided(chao2)==False  and protagonista.collided(chao3)==False and protagonista.collided(chao_ponte)==False) and chao==True):
         chao=False
         protagonista.set_curr_frame(15)
         protagonista.set_initial_frame(15)
@@ -105,8 +119,8 @@ while(True):
 
 
     #quando o protagonista tocar em algo, a VAR chao vira verdade e a gravidade zera
-    if(chao==False and (protagonista.collided(chao1) or protagonista.collided(chao2)) and 
-       (protagonista.y<chao1.y-chao1.height) and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
+    if(chao==False and (protagonista.collided(chao1) or protagonista.collided(chao2) or protagonista.collided(chao3) or protagonista.collided(chao_ponte)) and 
+       ((protagonista.y<chao1.y-chao1.height)or (protagonista.y>chao3.y-chao3.height) ) and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
         gravidade=0
         chao=True
 
@@ -130,12 +144,40 @@ while(True):
                 protagonista.set_curr_frame(6)
                 protagonistaIn.set_curr_frame(6)
 
+    if(teclado.key_pressed('ESC')):
+        break
+
+    if(protagonista.x > 8.5*janela.width/10 and direita==True):#>= janela.width-(protagonista.width)
+        for x in chaos:
+            x.move_x(-velocidadeX*janela.delta_time())
+    if(protagonista.x >=janela.width-(protagonista.width)):
+        protagonista.x = janela.width-(protagonista.width)
+        protagonistaIn.x = janela.width-(protagonista.width)
+
+    if(protagonista.x<-1 and direita== False):
+        for k in chaos:
+            k.move_x(-2*velocidadeX*janela.delta_time())
+    if(protagonista.x<=-1):
+        protagonista.x = -1
+        protagonistaIn.x = -1
+
+   
+    if(protagonista.y > janela.height):
+        protagonista.set_position(300,janela.height/3)
+        protagonistaIn.set_position(300,janela.height/3)
 
 
     janela.set_background_color((0, 0, 0))
 
+    ceu.draw()
+    if(protagonista.x == chao_ponte.x+chao_ponte.width/2):
+        janela.draw_text(str(txt), 0,0, 100,(0,0,0), "Calibri")
+    #if(mouse1.is_over_area)
+
     chao1.draw()
     chao2.draw()
+    chao3.draw()
+    chao_ponte.draw()
 
     protagonista.draw()
     protagonistaIn.draw()
