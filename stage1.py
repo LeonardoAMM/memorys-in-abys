@@ -10,9 +10,9 @@ mouse1 = Window.get_mouse()
 
 #tem 2 sprites:
 #o protagonista virado para direita
-protagonista=Sprite("imagens/sheet1.png",17)
+protagonista=Sprite("imagens/prota/sheet1.png",17)
 # e ele virado para a esquerda
-protagonistaIn=Sprite("imagens/sheetin.png",17)
+protagonistaIn=Sprite("imagens/prota/sheetin.png",17)
 
 txt = "Deseja ir para a próxima fase?"
 
