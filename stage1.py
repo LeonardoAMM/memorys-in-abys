@@ -14,9 +14,9 @@ protagonista=Sprite("imagens/prota/sheet1.png",17)
 # e ele virado para a esquerda
 protagonistaIn=Sprite("imagens/prota/sheetin.png",17)
 
-txt = "Deseja ir para a próxima fase?"
+Vida5=Sprite("imagens/vida/vida5.png")
 
-ceu = GameImage("./imagens/ceu.png")
+ceu = GameImage("./imagens/ceu.jpg")
 
 chao1=Sprite("imagens/terra_1.png")
 chao2=Sprite("imagens/terra_1.png")
@@ -31,6 +31,8 @@ vel_chao_rand = 30
 direita=True
 
 gravidade=0
+puloduplo=False
+recarga=0
 
 #variavel para ver se o player esta no chao
 chao=True
@@ -83,7 +85,12 @@ while(True):
 
     #Aqui muda a animação do protagonista enquanto pula, quando ele estiver no chao (VAR chao for verdade) e apertar W, ele muda para essa animação
     #a velocidadeY, ta positivo pq ele da um impulso
-    if(teclado.key_pressed("W") and chao==True):
+    if(teclado.key_pressed("W") and puloduplo==False and recarga>.3):
+        if(chao==True):
+            puloduplo=False
+            recarga=0
+        elif(chao==False and recarga>.9):
+            puloduplo=True
         chao=False
         protagonista.set_curr_frame(14)
         protagonista.set_initial_frame(15)
@@ -92,6 +99,9 @@ while(True):
         protagonistaIn.set_initial_frame(15)
         protagonistaIn.set_final_frame(17)
         velocidadeY=1
+        gravidade=0
+
+    recarga+=janela.delta_time()
 
     #Aqui muda a animação do protagonista enquanto ele cai, quando ele estava no chao (VAR chao for verdade) e não estiver tocando em mais nada (esses colides dai) ele cai direto
     #a velocidadY esta zerado, pq ele n da um impulso
@@ -123,7 +133,8 @@ while(True):
        ((protagonista.y<chao1.y-chao1.height)or (protagonista.y>chao3.y-chao3.height) ) and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
         gravidade=0
         chao=True
-
+        puloduplo=False
+        recarga=0
 
     #aqui é a animação do player ANDANDO, quando a velocidadeX for 0, mostra a ANIM dele parado, mas se for algo diferente, vai para a anim dele andando
     if(chao==True):
@@ -170,9 +181,8 @@ while(True):
     janela.set_background_color((0, 0, 0))
 
     ceu.draw()
-    if(protagonista.x == chao_ponte.x+chao_ponte.width/2):
-        janela.draw_text(str(txt), 0,0, 100,(0,0,0), "Calibri")
-    #if(mouse1.is_over_area)
+
+    Vida5.draw()
 
     chao1.draw()
     chao2.draw()
