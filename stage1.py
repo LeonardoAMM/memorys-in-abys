@@ -166,7 +166,7 @@ while(True):
         protagonista.set_position(300,janela.height/3)
         protagonistaIn.set_position(300,janela.height/3)
 
-
+    
     janela.set_background_color((0, 0, 0))
 
     ceu.draw()
