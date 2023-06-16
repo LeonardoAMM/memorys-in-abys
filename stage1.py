@@ -184,8 +184,6 @@ while(True):
 
     Vida5.draw()
 
-    janela.draw_text(str(chao), 0, 100, 68, (255,255,255), "Calibri")
-
     chao1.draw()
     chao2.draw()
     chao3.draw()
