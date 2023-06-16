@@ -89,7 +89,7 @@ while(True):
         if(chao==True):
             puloduplo=False
             recarga=0
-        elif(chao==False and recarga>.9):
+        elif(chao==False and recarga>.5):
             puloduplo=True
         chao=False
         protagonista.set_curr_frame(14)
@@ -129,8 +129,8 @@ while(True):
 
 
     #quando o protagonista tocar em algo, a VAR chao vira verdade e a gravidade zera
-    if(chao==False and (protagonista.collided(chao1) or protagonista.collided(chao2) or protagonista.collided(chao3) or protagonista.collided(chao_ponte)) and 
-       ((protagonista.y<chao1.y-chao1.height)or (protagonista.y>chao3.y-chao3.height) ) and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
+    if( (chao==False) and (((protagonista.collided(chao1) or protagonista.collided(chao2)) and (protagonista.y<chao1.y-chao1.height)) or (protagonista.collided(chao3) and (protagonista.y<chao3.y-chao3.height))
+     or (protagonista.collided(chao_ponte) and (protagonista.y < chao_ponte.y-chao_ponte.height*.7))) and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
         gravidade=0
         chao=True
         puloduplo=False
@@ -183,6 +183,8 @@ while(True):
     ceu.draw()
 
     Vida5.draw()
+
+    janela.draw_text(str(chao), 0, 100, 68, (255,255,255), "Calibri")
 
     chao1.draw()
     chao2.draw()
