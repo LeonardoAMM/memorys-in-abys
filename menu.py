@@ -7,3 +7,5 @@ janela = Window(1400,900)
 while(True):
 
     janela.update()
+
+    
