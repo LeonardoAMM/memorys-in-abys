@@ -329,12 +329,4 @@ while(True):
     protagonistaIn.update()
     protagonista.update()
 
-    print(inimigos)
-
-    for y in range(Ninimigos):
-        if(inimigos[y][2]==True):
-            inimigos[y][0].draw()
-            inimigos[y][0].update()
-
-
-    janela.update()
+janela.update()
