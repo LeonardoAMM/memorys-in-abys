@@ -43,7 +43,7 @@ caixa = Sprite("imagens/stage2/caixa.png")
 
 tronco.set_position(200,janela.height/1.5)
 pedra.set_position(1100, janela.height/2.25)
-est.set_position(1930,janela.height/1.25)
+est.set_position(190,janela.height/1.25)
 estc.set_position(1600,janela.height/1.25)
 tronco2.set_position(3200,janela.height/1.5)
 bloco.set_position(2700,janela.height/2)
