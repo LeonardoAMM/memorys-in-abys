@@ -3,6 +3,8 @@ from PPlay.sprite import *
 from PPlay.gameimage import *
 from PPlay.keyboard import *
 
+caverna = GameImage("imagens/stage2/caverna.png")
+
 #def stage1(var):
 janela = Window(1400,900)
 teclado = Keyboard()
@@ -27,16 +29,25 @@ vidas.append(Vida5)
 vidas.append(vida)
 
 
-ceu = GameImage("./imagens/ceu.jpg")
 
-chao1=Sprite("imagens/terra_1.png")
-chao2=Sprite("imagens/terra_1.png")
-chao3=Sprite("imagens/terra_1.png")
-chao_ponte=Sprite("imagens/ponte.png")
-chao_flut = Sprite("imagens/terra_1.png")
-chao_flut2 = Sprite("imagens/terra_1.png")
-chao_portal = Sprite("imagens/terra_1.png")
-portal = Sprite("imagens/portal1.png")
+tronco = Sprite("imagens/stage2/tronco.png")
+tronco1 = Sprite("imagens/stage2/tronco.png")
+tronco2 = Sprite("imagens/stage2/tronco2.png")
+pedra = Sprite("imagens/stage2/pedra.png")
+bloco = Sprite("imagens/stage2/bloco_pedra.png")
+bloco_pedra = Sprite("imagens/stage2/bloco_pedra.png")
+est = Sprite("imagens/stage2/est.png")
+estc = Sprite("imagens/stage2/estc.png")
+porta = Sprite("imagens/stage2/Porta.PNG")
+caixa = Sprite("imagens/stage2/caixa.png")
+
+tronco.set_position(200,janela.height/1.5)
+pedra.set_position(1100, janela.height/2.25)
+est.set_position(1930,janela.height/1.25)
+estc.set_position(1600,janela.height/1.25)
+tronco2.set_position(3200,janela.height/1.5)
+bloco.set_position(2700,janela.height/2)
+porta.set_position(3200+3*porta.width,janela.height/2.8+porta.height/2)
 
 
 chaos=[]
@@ -87,25 +98,14 @@ segundo=0
 tempo=0
 fps=0
 cont=0
-
-chao1.set_position(300,janela.height/2.5+chao1.height)
-chao2.set_position(1000,janela.height/2.5+chao2.height)
-chao3.set_position(1600,1.5*janela.height/2+chao3.height)
-chao_ponte.set_position(2400,janela.height/2.8+chao_ponte.height)
-chao_flut.set_position(3800,janela.height/2+chao_ponte.height)
-chao_flut2.set_position(3650,janela.height/2 -1.5*chao_ponte.height)
-chao_portal.set_position(4700,janela.height/2.8+chao_ponte.height)
-portal.set_position(4700+3*portal.width,janela.height/2.8+chao_ponte.height-portal.height)
-
-
-chaos.append(chao1)
-chaos.append(chao2)
-chaos.append(chao3)
-chaos.append(chao_ponte)
-chaos.append(chao_flut)
-chaos.append(chao_flut2)
-chaos.append(chao_portal)
-chaos.append(portal)
+chaos.append(est)
+chaos.append(tronco)
+chaos.append(pedra)
+chaos.append(tronco1)
+chaos.append(tronco2)
+chaos.append(bloco)
+chaos.append(estc)
+chaos.append(porta)
 
 janela.set_title("Memories In Abyss")
 
@@ -134,10 +134,10 @@ while(True):
         else:
             x[0].move_y(0)
 
-        if((x[0].collided(chao1)==False and x[0].collided(chao_portal)==False and x[0].collided(chao2)==False  and x[0].collided(chao3)==False and x[0].collided(chao_ponte)==False and x[0].collided(chao_flut)==False and x[0].collided(chao_flut2)==False) and x[1]==True):
+        if((x[0].collided(tronco)==False and x[0].collided(tronco2)==False and x[0].collided(estc)==False and x[0].collided(pedra)==False  and x[0].collided(est)==False and x[0].collided(bloco_pedra)==False and x[0].collided(bloco)==False) and x[1]==True):
             x[1]=False
 
-        if( (x[1]==False) and ((x[0].collided(chao1)) or (x[0].collided(chao_portal)) or (x[0].collided(chao2)) or (x[0].collided(chao3)) or (x[0].collided(chao_ponte)) or (x[0].collided(chao_flut)) or (x[0].collided(chao_flut2))) ):
+        if( (x[1]==False) and ((x[0].collided(tronco)) or (x[0].collided(tronco2))or (x[0].collided(estc)) or (x[0].collided(pedra)) or (x[0].collided(est)) or (x[0].collided(bloco_pedra)) or (x[0].collided(bloco))) ):
             x[1]=True
 
         x[5]+=janela.delta_time()
@@ -231,7 +231,7 @@ while(True):
     #Aqui muda a animação do protagonista enquanto ele cai, quando ele estava no chao (VAR chao for verdade) e não estiver tocando em mais nada (esses colides dai) ele cai direto
     #a velocidadY esta zerado, pq ele n da um impulso
 
-    if((protagonista.collided(chao1)==False and protagonista.collided(chao2)==False  and protagonista.collided(chao3)==False and protagonista.collided(chao_ponte)==False and protagonista.collided(chao_flut)==False and protagonista.collided(chao_flut2)==False and protagonista.collided(chao_portal)==False) and chao==True):
+    if((protagonista.collided(tronco)==False and protagonista.collided(pedra)==False and protagonista.collided(estc)==False and protagonista.collided(est)==False and protagonista.collided(bloco_pedra)==False and protagonista.collided(bloco)==False and protagonista.collided(tronco2)==False) and chao==True):
         chao=False
         protagonista.set_curr_frame(15)
         protagonista.set_initial_frame(15)
@@ -255,8 +255,8 @@ while(True):
 
 
     #quando o protagonista tocar em algo, a VAR chao vira verdade e a gravidade zera
-    if( (chao==False) and (((protagonista.collided(chao1) or protagonista.collided(chao2)) and (protagonista.y<=chao1.y-chao1.height)) or (protagonista.collided(chao3) and (protagonista.y<=chao3.y-chao3.height))or (protagonista.collided(chao_portal) and (protagonista.y<=chao_portal.y-chao_portal.height))
-    or (protagonista.collided(chao_ponte) and (protagonista.y <= chao_ponte.y-chao_ponte.height*.7)) or (protagonista.collided(chao_flut) and (protagonista.y<=chao_flut.y-chao_flut.height)) or (protagonista.collided(chao_flut2) and (protagonista.y<=chao_flut2.y-chao_flut2.height))) and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
+    if( (chao==False) and (((protagonista.collided(tronco)) and (protagonista.y<=tronco.y-tronco.height))or (protagonista.collided(pedra) and (protagonista.y<=pedra.y-pedra.height)) or (protagonista.collided(est) and (protagonista.y<=est.y-est.height))or (protagonista.collided(tronco2) and (protagonista.y<=tronco2.y-tronco2.height))
+     or (protagonista.collided(bloco_pedra) and (protagonista.y <= bloco_pedra.y-bloco_pedra.height*.7))or (protagonista.collided(estc) and (protagonista.y <= estc.y-estc.height*.7)) or (protagonista.collided(bloco) and (protagonista.y<=bloco.y-bloco.height))) and (protagonista.get_curr_frame()!=14 or protagonistaIn.get_curr_frame()!=14)):
         gravidade=0
         chao=True
         puloduplo=False
@@ -322,25 +322,25 @@ while(True):
         fps=cont
         cont=0
     
-    
-    if(protagonista.collided(portal)):
-        var = 1
-        break#isso depois de botar se ele quer continuar ou não, botar um janeladrawtext
+    #if passou pelo portal var +=1
 
+    if(protagonista.collided(porta)):
+        var = 2
+        #break#isso depois de botar se ele quer continuar ou não, botar um janeladrawtext
 
-    ceu.draw()
+    caverna.draw()
 
     vidas[0].draw()
     janela.draw_text(str(fps), 0, 0, 68, (255,255,255), "Calibri")
 
-    chao1.draw()
-    chao2.draw()
-    chao3.draw()
-    chao_ponte.draw()
-    chao_flut.draw()
-    chao_flut2.draw()
-    chao_portal.draw()
-    portal.draw()
+    
+    tronco.draw()
+    pedra.draw()
+    est.draw()
+    estc.draw()
+    tronco2.draw()
+    bloco.draw()
+    porta.draw()
 
     protagonista.draw()
     protagonistaIn.draw()
