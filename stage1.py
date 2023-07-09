@@ -5,7 +5,7 @@ from PPlay.keyboard import *
 import protagonis
 import inimig
 
-
+#def stage1(var):
 janela = Window(1400,900)
 teclado = Keyboard()
 mouse1 = Window.get_mouse()
@@ -34,12 +34,17 @@ vidas.append(Vida5)
 vidas.append(vida)
 
 
-ceu = GameImage("./imagens/ceu.jpg")
+ceu = GameImage("imagens/stage1/ceu.jpg")
 
-chao1=Sprite("imagens/terra_1.png")
-chao2=Sprite("imagens/terra_1.png")
-chao3=Sprite("imagens/terra_1.png")
-chao_ponte=Sprite("imagens/ponte.png")
+chao1=Sprite("imagens/stage1/terra_1.png")
+chao2=Sprite("imagens/stage1/terra_1.png")
+chao3=Sprite("imagens/stage1/terra_1.png")
+chao_ponte=Sprite("imagens/stage1/ponte.png")
+chao_flut = Sprite("imagens/stage1/terra_1.png")
+chao_flut2 = Sprite("imagens/stage1/terra_1.png")
+chao_portal = Sprite("imagens/stage1/terra_1.png")
+portal = Sprite("imagens/stage1/portal1.png")
+
 
 chaos=[]
 
@@ -100,20 +105,24 @@ tempo=0
 fps=0
 cont=0
 
-
-
-
 chao1.set_position(300,janela.height/2.5+chao1.height)
 chao2.set_position(1000,janela.height/2.5+chao2.height)
 chao3.set_position(1600,1.5*janela.height/2+chao3.height)
 chao_ponte.set_position(2400,janela.height/2.8+chao_ponte.height)
+chao_flut.set_position(3800,janela.height/2+chao_ponte.height)
+chao_flut2.set_position(3650,janela.height/2 -1.5*chao_ponte.height)
+chao_portal.set_position(4700,janela.height/2.8+chao_ponte.height)
+portal.set_position(4700+3*portal.width,janela.height/2.8+chao_ponte.height-portal.height)
 
 
 chaos.append(chao1)
 chaos.append(chao2)
 chaos.append(chao3)
 chaos.append(chao_ponte)
-
+chaos.append(chao_flut)
+chaos.append(chao_flut2)
+chaos.append(chao_portal)
+chaos.append(portal)
 
 janela.set_title("Memories In Abyss")
 
@@ -142,10 +151,10 @@ while(True):
 
     for x in inimigos:
 
-        if((x[0].collided(chao1)==False and x[0].collided(chao2)==False  and x[0].collided(chao3)==False and x[0].collided(chao_ponte)==False) and x[1]==True):
+        if((x[0].collided(chao1)==False and x[0].collided(chao_portal)==False and x[0].collided(chao2)==False  and x[0].collided(chao3)==False and x[0].collided(chao_ponte)==False and x[0].collided(chao_flut)==False and x[0].collided(chao_flut2)==False) and x[1]==True):
             x[1]=False
 
-        if( (x[1]==False) and ((x[0].collided(chao1)) or (x[0].collided(chao2)) or (x[0].collided(chao3) or (x[0].collided(chao_ponte)))) ):
+        if( (x[1]==False) and ((x[0].collided(chao1)) or (x[0].collided(chao_portal)) or (x[0].collided(chao2)) or (x[0].collided(chao3)) or (x[0].collided(chao_ponte)) or (x[0].collided(chao_flut)) or (x[0].collided(chao_flut2))) ):
             x[1]=True
             
         if(x[0].y>janela.height):
@@ -200,6 +209,15 @@ while(True):
         for k in inimigos:
             k[0].move_x(-prota[2]*janela.delta_time())
             
+    if(protagonista.x<=-1):
+        protagonista.x = -1
+        protagonistaIn.x = -1
+
+   
+    if(protagonista.y > janela.height):
+        protagonista.set_position(300,janela.height/3)
+        protagonistaIn.set_position(300,janela.height/3)
+
 
     segundo+=janela.delta_time()
 
@@ -211,6 +229,11 @@ while(True):
         segundo=0
         fps=cont
         cont=0
+    
+    
+    if(protagonista.collided(portal)):
+        var = 1
+        break#isso depois de botar se ele quer continuar ou não, botar um janeladrawtext
 
 
     ceu.draw()
@@ -222,6 +245,10 @@ while(True):
     chao2.draw()
     chao3.draw()
     chao_ponte.draw()
+    chao_flut.draw()
+    chao_flut2.draw()
+    chao_portal.draw()
+    portal.draw()
 
     prota[0].draw()
     prota[1].draw()
