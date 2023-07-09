@@ -27,16 +27,16 @@ vidas.append(Vida5)
 vidas.append(vida)
 
 
-ceu = GameImage("./imagens/ceu.jpg")
+ceu = GameImage("imagens/stage1/ceu.jpg")
 
-chao1=Sprite("imagens/terra_1.png")
-chao2=Sprite("imagens/terra_1.png")
-chao3=Sprite("imagens/terra_1.png")
-chao_ponte=Sprite("imagens/ponte.png")
-chao_flut = Sprite("imagens/terra_1.png")
-chao_flut2 = Sprite("imagens/terra_1.png")
-chao_portal = Sprite("imagens/terra_1.png")
-portal = Sprite("imagens/portal1.png")
+chao1=Sprite("imagens/stage1/terra_1.png")
+chao2=Sprite("imagens/stage1/terra_1.png")
+chao3=Sprite("imagens/stage1/terra_1.png")
+chao_ponte=Sprite("imagens/stage1/ponte.png")
+chao_flut = Sprite("imagens/stage1/terra_1.png")
+chao_flut2 = Sprite("imagens/stage1/terra_1.png")
+chao_portal = Sprite("imagens/stage1/terra_1.png")
+portal = Sprite("imagens/stage1/portal1.png")
 
 
 chaos=[]
