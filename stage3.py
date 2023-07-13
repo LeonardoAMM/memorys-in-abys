@@ -6,15 +6,15 @@ import protagonis
 import soldado
 
 
-castelo = GameImage("imagens/stage3/castelo.png")
 
-def stage3(var):
-    janela = Window(1400,900)
+
+def stage3(var,janela):
+    
     teclado = Keyboard()
-    mouse1 = Window.get_mouse()
+   
 
     prota=[]
-
+    castelo = GameImage("imagens/stage3/castelo.png")
     #tem 2 sprites:
     #o protagonista virado para direita
     protagonista=Sprite("imagens/prota/sheet5.png",24)

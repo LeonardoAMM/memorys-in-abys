@@ -5,16 +5,16 @@ from PPlay.keyboard import *
 import protagonis
 import esqueleto
 
-caverna = GameImage("imagens/stage2/caverna.png")
 
 
-prota=[]
-
-def stage2(var):
-    janela = Window(1400,900)
+def stage2(var,janela):
+    
     teclado = Keyboard()
-    mouse1 = Window.get_mouse()
+    
+    caverna = GameImage("imagens/stage2/caverna.png")
 
+
+    prota=[]
     #tem 2 sprites:
     #o protagonista virado para direita
     protagonista=Sprite("imagens/prota/sheet5.png",24)
@@ -278,10 +278,6 @@ def stage2(var):
 
 
         print(renasce)
-
-
-        
-        
 
         if(protagonista.collided(porta)):
            var+=1

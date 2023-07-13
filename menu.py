@@ -8,9 +8,9 @@ from stage3 import *
 janela = Window(1400,900)
 var_mapa = 0
 
-menu = GameImage("./imagens/menu/back.PNG")
+menu = GameImage("./imagens/menu/back.png")
 option1 = Sprite("./imagens/menu/start.png")
-option2 = Sprite("./imagens/menu/sair.PNG")
+option2 = Sprite("./imagens/menu/sair.png")
 aceso_option1 = Sprite("./imagens/menu/acesostart.png")
 aceso_option2 = Sprite("./imagens/menu/acesoquit.png")
 option1.set_position(janela.width/2 - option1.width/2,janela.height/2 - 1.1*option1.height)
@@ -27,16 +27,16 @@ while True:
         option1.hide()
         if (mouse.is_button_pressed(1)):
             if(var_mapa == 0):
-                var_mapa = stage1(var_mapa)
+                var_mapa = stage1(var_mapa,janela)
                 
             elif(var_mapa == 1):
-                var_mapa = stage2(var_mapa)
+                var_mapa = stage2(var_mapa,janela)
             
             elif(var_mapa == 2):
-                var_mapa = stage3(var_mapa)
+                var_mapa = stage3(var_mapa,janela)
             
 
-        print(var_mapa)
+        
     elif mouse.is_over_area((option2.x,option2.y),(option2.x+option2.width,option2.y+option2.height)):
         aceso_option2.unhide()
         option2.hide()
