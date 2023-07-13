@@ -2,6 +2,7 @@ from PPlay.window import *
 from PPlay.sprite import *
 from PPlay.gameimage import *
 from PPlay.keyboard import *
+from PPlay.sound import *
 
 
 
@@ -58,7 +59,7 @@ def protag(prota,janela,hitboxs,vidas,hitboxp,renasce):
 
         for x in hitboxs:
             if(prota[0].collided(x) and prota[11]==False and prota[15]==False):
-                vidas[1]-=1
+                vidas[1]-=.5
                 prota[15]=True
 
         prota[14]+=janela.delta_time()

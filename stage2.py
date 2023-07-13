@@ -2,16 +2,21 @@ from PPlay.window import *
 from PPlay.sprite import *
 from PPlay.gameimage import *
 from PPlay.keyboard import *
+from PPlay.sound import *
 import protagonis
 import esqueleto
 
 
 
-def stage2(var,janela):
+def stage2(var,janela,morte):
     
     teclado = Keyboard()
     
     caverna = GameImage("imagens/stage2/caverna.png")
+
+    som=Sound("musicas/2fase.ogg")
+    som.set_repeat(1)
+    som.play()
 
 
     prota=[]
@@ -115,7 +120,7 @@ def stage2(var,janela):
 
     inimigos=[]
 
-    Ninimigos=7
+    Ninimigos=20
 
     for x in range(Ninimigos):
         inimigoL=[]
@@ -123,7 +128,7 @@ def stage2(var,janela):
         esquelet.set_total_duration(3000)
         esquelet.set_initial_frame(0)
         esquelet.set_final_frame(4)
-        esquelet.set_position(300+x*700,janela.height/6)
+        esquelet.set_position(600+x*700,janela.height/6)
         gravisli=False
         aparece=False
         ataqueini=False
@@ -183,6 +188,9 @@ def stage2(var,janela):
         if(vidas[1]==0):
             del vidas[0]
             vidas.insert(0,Vida0)
+            som.stop()
+            morte=True
+            return var,morte
 
         hitboxsp.clear()
         
@@ -242,7 +250,8 @@ def stage2(var,janela):
 
 
         if(teclado.key_pressed('ESC')):
-            return var
+            som.stop()
+            return var,morte
 
                 
         if(protagonista.x<=-1):
@@ -277,11 +286,10 @@ def stage2(var,janela):
             cont=0
 
 
-        print(renasce)
-
-        if(protagonista.collided(porta)):
+        if(protagonista.collided(porta) and Ninimigos==0 and porta.x<janela.width*.9):
+           som.stop()
            var+=1
-           return var
+           return var,morte
 
         caverna.draw()
 

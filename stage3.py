@@ -2,6 +2,7 @@ from PPlay.window import *
 from PPlay.sprite import *
 from PPlay.gameimage import *
 from PPlay.keyboard import *
+from PPlay.sound import *
 import protagonis
 import soldado
 
@@ -12,6 +13,10 @@ def stage3(var,janela):
     
     teclado = Keyboard()
    
+   
+    som=Sound("musicas/3fase.ogg")
+    som.set_repeat(1)
+    som.play()
 
     prota=[]
     castelo = GameImage("imagens/stage3/castelo.png")
@@ -112,7 +117,7 @@ def stage3(var,janela):
         solda.set_total_duration(3000)
         solda.set_initial_frame(0)
         solda.set_final_frame(4)
-        solda.set_position(300+x*700,janela.height/6)
+        solda.set_position(600+x*700,janela.height/6)
         gravisli=False
         aparece=False
         ataqueini=False
@@ -172,6 +177,9 @@ def stage3(var,janela):
         if(vidas[1]==0):
             del vidas[0]
             vidas.insert(0,Vida0)
+            som.stop()
+            morte=True
+            return var,morte
 
         hitboxsp.clear()
 
@@ -229,7 +237,8 @@ def stage3(var,janela):
 
 
         if(teclado.key_pressed('ESC')):
-            return var
+            som.stop()
+            return var,morte
 
         if(prota[0].x > janela.width-(prota[0].width) and prota[4]==True):#>= janela.width-(protagonista.width)
             for x in chaos:
@@ -246,9 +255,10 @@ def stage3(var,janela):
             for k in inimigos:
                 k[0].move_x(-prota[2]*janela.delta_time())
                 
-        if(protagonista.collided(porta)):
+        if(protagonista.collided(porta) and Ninimigos==0 and porta.x<janela.width*.9):
+            som.stop()
             var+=1
-            return var
+            return var,morte
 
 
         segundo+=janela.delta_time()

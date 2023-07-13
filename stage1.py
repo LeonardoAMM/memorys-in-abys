@@ -2,15 +2,19 @@ from PPlay.window import *
 from PPlay.sprite import *
 from PPlay.gameimage import *
 from PPlay.keyboard import *
+from PPlay.sound import *
 import protagonis
 import slime
 
 
-def stage1(var,janela):
+def stage1(var,janela,morte):
     
     teclado = Keyboard()
     
 
+    som=Sound("musicas/1fase.ogg")
+    som.set_repeat(1)
+    som.play()
     prota=[]
 
     #tem 2 sprites:
@@ -103,7 +107,7 @@ def stage1(var,janela):
         Slime.set_total_duration(3000)
         Slime.set_initial_frame(0)
         Slime.set_final_frame(4)
-        Slime.set_position(300+x*700,janela.height/6)
+        Slime.set_position(600+x*700,janela.height/6)
         gravisli=False
         aparece=False
         ataqueini=False
@@ -170,6 +174,9 @@ def stage1(var,janela):
         if(vidas[1]==0):
             del vidas[0]
             vidas.insert(0,Vida0)
+            som.stop()
+            morte=True
+            return var,morte
 
         hitboxsp.clear()
 
@@ -231,7 +238,8 @@ def stage1(var,janela):
 
 
         if(teclado.key_pressed('ESC')):
-            return var
+            som.stop()
+            return var,morte
 
         if(prota[0].x > janela.width-(prota[0].width) and prota[4]==True):#>= janela.width-(protagonista.width)
             for x in chaos:
@@ -265,9 +273,11 @@ def stage1(var,janela):
             cont=0
         
         
-        if(protagonista.collided(portal)):
+        if(protagonista.collided(portal) and portal.x<janela.width*.9 and Ninimigos==0):
+           som.stop()
            var+=1
-           return var
+           return var,morte
+        
 
 
         ceu.draw()

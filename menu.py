@@ -4,9 +4,18 @@ from PPlay.gameimage import *
 from stage1 import *
 from stage2 import *
 from stage3 import *
+from morte import *
+from PPlay.sound import *
 
 janela = Window(1400,900)
 var_mapa = 0
+
+som=Sound("musicas/menu.ogg")
+som.set_repeat(1)
+som.play()
+
+mortee=False
+
 
 menu = GameImage("./imagens/menu/back.png")
 option1 = Sprite("./imagens/menu/start.png")
@@ -20,6 +29,16 @@ aceso_option2.set_position(janela.width/2 -0.99* option2.width/2, janela.height/
 mouse = janela.get_mouse()
 
 while True:
+    if(som.is_playing()==False):
+        som=Sound("musicas/menu.ogg")
+        som.set_repeat(1)
+        som.play()
+
+    if(mortee==True):
+        som.stop()
+        mortt(janela)
+
+
     aceso_option1.hide()
     aceso_option2.hide()
     if mouse.is_over_area((option1.x,option1.y), (option1.x+option1.width,option1.y+option1.height)): 
@@ -27,13 +46,19 @@ while True:
         option1.hide()
         if (mouse.is_button_pressed(1)):
             if(var_mapa == 0):
-                var_mapa = stage1(var_mapa,janela)
+                aux = stage1(var_mapa,janela,mortee)
+                mortee = aux[1]
+                var_mapa = aux[0]
                 
             elif(var_mapa == 1):
-                var_mapa = stage2(var_mapa,janela)
+                aux = stage2(var_mapa,janela,mortee)
+                mortee = aux[1]
+                var_mapa = aux[0]
             
             elif(var_mapa == 2):
-                var_mapa = stage3(var_mapa,janela)
+                aux = stage3(var_mapa,janela,mortee)
+                mortee = aux[1]
+                var_mapa = aux[0]
             
 
         
