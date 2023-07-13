@@ -5,7 +5,6 @@ from PPlay.keyboard import *
 import protagonis
 import slime
 
-var=0
 
 def stage1(var):
     janela = Window(1400,900)
@@ -299,4 +298,3 @@ def stage1(var):
 
 
         janela.update()
-stage1(var)
