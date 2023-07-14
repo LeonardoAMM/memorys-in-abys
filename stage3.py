@@ -10,7 +10,7 @@ from fim import *
 
 
 
-def stage3(var,janela,morte):
+def stage3(var,janela,morte,ganhar):
     
     teclado = Keyboard()
    
@@ -180,7 +180,7 @@ def stage3(var,janela,morte):
             vidas.insert(0,Vida0)
             som.stop()
             morte=True
-            return var,morte
+            return var,morte,ganhar
 
         hitboxsp.clear()
 
@@ -239,7 +239,7 @@ def stage3(var,janela,morte):
 
         if(teclado.key_pressed('ESC')):
             som.stop()
-            return var,morte
+            return var,morte,ganhar
 
         if(prota[0].x > janela.width-(prota[0].width) and prota[4]==True):#>= janela.width-(protagonista.width)
             for x in chaos:
@@ -259,9 +259,8 @@ def stage3(var,janela,morte):
         if(protagonista.collided(porta) and Ninimigos==0 and porta.x<janela.width*.9):
             som.stop()
             var+=1
-            if (var ==3):
-                fim(janela)
-            return var,morte
+            ganhar = True
+            return var,morte,ganhar
 
 
         segundo+=janela.delta_time()
@@ -275,10 +274,6 @@ def stage3(var,janela,morte):
             fps=cont
             cont=0
         
-        
-
-
-
         castelo.draw()
 
         

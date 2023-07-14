@@ -15,7 +15,7 @@ som.set_repeat(1)
 som.play()
 
 mortee=False
-
+ganhar = False
 
 menu = GameImage("./imagens/menu/back.png")
 option1 = Sprite("./imagens/menu/start.png")
@@ -37,7 +37,7 @@ while True:
     if(mortee==True):
         som.stop()
         mortee = mortt(janela)
-
+    
 
     aceso_option1.hide()
     aceso_option2.hide()
@@ -56,10 +56,20 @@ while True:
                 var_mapa = aux[0]
             
             elif(var_mapa == 2):
-                aux = stage3(var_mapa,janela,mortee)
+                aux = stage3(var_mapa,janela,mortee,ganhar)
                 mortee = aux[1]
                 var_mapa = aux[0]
-            
+                ganhar = aux[2]
+
+    if(ganhar == True):
+        som.stop()
+        aux1 = fim(janela,var_mapa)
+        ganhar = aux1[0]
+        var_mapa = aux[1]
+
+
+
+
     elif mouse.is_over_area((option2.x,option2.y),(option2.x+option2.width,option2.y+option2.height)):
         aceso_option2.unhide()
         option2.hide()

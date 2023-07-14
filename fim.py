@@ -4,7 +4,7 @@ from PPlay.gameimage import *
 from PPlay.sound import *
 
 
-def fim(janela):
+def fim(janela,var_mapa):
     uni = GameImage("./imagens/Background_space.png")
     som=Sound("musicas/ganhar.ogg")
     som.set_repeat(1)
@@ -19,6 +19,10 @@ def fim(janela):
         if(teclado.key_pressed("ESC")):
             som.stop()
             
-
+        if(teclado.key_pressed("ESC")):
+            som.stop()
+            ganhar = False
+            var_mapa = 0
+            return ganhar,var_mapa
         janela.update()
 
