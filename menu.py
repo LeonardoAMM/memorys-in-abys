@@ -36,7 +36,7 @@ while True:
 
     if(mortee==True):
         som.stop()
-        mortt(janela)
+        mortee = mortt(janela)
 
 
     aceso_option1.hide()

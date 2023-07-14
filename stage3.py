@@ -9,7 +9,7 @@ import soldado
 
 
 
-def stage3(var,janela):
+def stage3(var,janela,morte):
     
     teclado = Keyboard()
    
