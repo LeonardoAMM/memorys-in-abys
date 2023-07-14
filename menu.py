@@ -60,10 +60,6 @@ while True:
                 mortee = aux[1]
                 var_mapa = aux[0]
             
-
-
-
-        
     elif mouse.is_over_area((option2.x,option2.y),(option2.x+option2.width,option2.y+option2.height)):
         aceso_option2.unhide()
         option2.hide()
@@ -72,7 +68,6 @@ while True:
 
     option1.unhide()
     option2.unhide()
-
 
     menu.draw()
     option1.draw()
