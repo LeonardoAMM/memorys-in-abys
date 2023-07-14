@@ -5,6 +5,7 @@ from PPlay.keyboard import *
 from PPlay.sound import *
 import protagonis
 import soldado
+from fim import *
 
 
 
@@ -258,6 +259,8 @@ def stage3(var,janela,morte):
         if(protagonista.collided(porta) and Ninimigos==0 and porta.x<janela.width*.9):
             som.stop()
             var+=1
+            if (var ==3):
+                fim(janela)
             return var,morte
 
 
@@ -272,7 +275,7 @@ def stage3(var,janela,morte):
             fps=cont
             cont=0
         
-        #if passou pelo portal var +=1
+        
 
 
 
